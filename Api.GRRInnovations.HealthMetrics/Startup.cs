@@ -1,4 +1,9 @@
-﻿namespace Api.GRRInnovations.HealthMetrics
+﻿using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Prometheus;
+
+namespace Api.GRRInnovations.HealthMetrics
 {
     public class Startup
     {
@@ -13,8 +18,10 @@
         {
             services.AddControllers();
             services.AddSwaggerGen();
-            services.AddHealthChecks();
 
+            services.AddHealthChecks()
+                .AddCheck("self", () => HealthCheckResult.Healthy())
+                .ForwardToPrometheus();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -24,15 +31,23 @@
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            app.UseHttpsRedirection();
+
+            app.UseHttpMetrics();
+
             app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHealthChecks("/health");
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions
+                {
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
+
+            // Prometheus metrics endpoint
+            app.UseMetricServer("/metrics");
         }
     }
 }

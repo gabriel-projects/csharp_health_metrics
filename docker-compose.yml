@@ -1,0 +1,24 @@
+services:
+  api.grrinnovations.healthmetrics:
+    image: ${DOCKER_REGISTRY-}apigrrinnovationshealthmetrics
+    build:
+      context: .
+      dockerfile: Api.GRRInnovations.HealthMetrics/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+    depends_on:
+      - prometheus
+  
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+   
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
