@@ -1,3 +1,5 @@
+using Serilog;
+
 namespace Api.GRRInnovations.HealthMetrics
 {
     public class Program
@@ -9,6 +11,7 @@ namespace Api.GRRInnovations.HealthMetrics
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

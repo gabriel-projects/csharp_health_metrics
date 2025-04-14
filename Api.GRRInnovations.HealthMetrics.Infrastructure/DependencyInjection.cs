@@ -1,5 +1,8 @@
 ﻿using Api.GRRInnovations.HealthMetrics.Infrastructure.Helpers;
 using Api.GRRInnovations.HealthMetrics.Infrastructure.Persistence;
+using Api.GRRInnovations.HealthMetrics.Infrastructure.Services;
+using Api.GRRInnovations.HealthMetrics.Interfaces.Services;
+using CorrelationId.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,13 +12,19 @@ namespace Api.GRRInnovations.HealthMetrics.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        {
+            AddDbContext(services, configuration);
+            services.AddSingleton<IMetricsService, MetricsService>();
+
+            return services;
+        }
+
+        private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
             var connection = ConnectionHelper.GetConnectionString(configuration);
 
             services.AddDbContextPool<ApplicationDbContext>(options => ConfigureDatabase(options, connection));
-
-            return services;
         }
 
         private static void ConfigureDatabase(DbContextOptionsBuilder options, string connection)
