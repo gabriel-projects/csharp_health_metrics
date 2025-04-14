@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="ContractResolver\" />
+    <Folder Include="Wrappers\In\" />
+    <Folder Include="Wrappers\Out\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.GRRInnovations.HealthMetrics.Interfaces\Api.GRRInnovations.HealthMetrics.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,4 +1,5 @@
-﻿using HealthChecks.UI.Client;
+﻿using Api.GRRInnovations.HealthMetrics.Middlewares;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Prometheus;
@@ -35,6 +36,9 @@ namespace Api.GRRInnovations.HealthMetrics
             app.UseHttpMetrics();
 
             app.UseRouting();
+
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
