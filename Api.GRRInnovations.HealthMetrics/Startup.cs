@@ -2,6 +2,10 @@
 using Api.GRRInnovations.HealthMetrics.Middlewares;
 using CorrelationId;
 using CorrelationId.DependencyInjection;
+using Elastic.Channels;
+using Elastic.Clients.Elasticsearch;
+using Elastic.Ingest.Elasticsearch;
+using Elastic.Serilog.Sinks;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -41,6 +45,27 @@ namespace Api.GRRInnovations.HealthMetrics
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console(new RenderedCompactJsonFormatter()) // 👈 Isso mostra tudo, inclusive o CorrelationId
+                .WriteTo.File(
+                         path: "Logs/log-.txt",
+                        rollingInterval: RollingInterval.Day,
+                        outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] (CorrelationId={CorrelationId}) {Message:lj}{NewLine}{Exception}")
+                .WriteTo.Elasticsearch([new Uri("http://elasticsearch:9200")], opts =>
+                {
+                    // Usando Data Stream (recomendado para Elasticsearch 8+)
+                    opts.DataStream = new Elastic.Ingest.Elasticsearch.DataStreams.DataStreamName("app-logs", "console-example", "demo");
+
+                    // Cria o índice/data stream somente em caso de falha
+                    opts.BootstrapMethod = BootstrapMethod.Failure;
+
+                    // Ajusta o canal assíncrono de envio (para alta performance)
+                    opts.ConfigureChannel = channelOpts =>
+                    {
+                        channelOpts.BufferOptions = new BufferOptions
+                        {
+                            OutboundBufferMaxSize = 10
+                        };
+                    };
+                })
                 .CreateLogger();
         }
 
