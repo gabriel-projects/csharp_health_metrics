@@ -399,3 +399,4 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /Api.GRRInnovations.HealthMetrics/appsettings.Development.json
+/Api.GRRInnovations.HealthMetrics/appsettings.Development.json
