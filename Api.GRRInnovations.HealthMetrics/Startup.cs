@@ -42,6 +42,8 @@ namespace Api.GRRInnovations.HealthMetrics
                 options.RequestHeader = "X-Correlation-ID";
             });
 
+            var elasticUri = _configuration["ElasticConfiguration:Uri"] ?? "http://localhost:9200";
+
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
                 .WriteTo.Console(new RenderedCompactJsonFormatter()) // 👈 Isso mostra tudo, inclusive o CorrelationId
@@ -49,7 +51,7 @@ namespace Api.GRRInnovations.HealthMetrics
                          path: "Logs/log-.txt",
                         rollingInterval: RollingInterval.Day,
                         outputTemplate: "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] (CorrelationId={CorrelationId}) {Message:lj}{NewLine}{Exception}")
-                .WriteTo.Elasticsearch([new Uri("http://elasticsearch:9200")], opts =>
+                .WriteTo.Elasticsearch([new Uri(elasticUri)], opts =>
                 {
                     // Usando Data Stream (recomendado para Elasticsearch 8+)
                     opts.DataStream = new Elastic.Ingest.Elasticsearch.DataStreams.DataStreamName("app-logs", "console-example", "demo");

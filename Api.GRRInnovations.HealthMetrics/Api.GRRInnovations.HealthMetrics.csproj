@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>36ffda62-ed6c-4c77-bdc0-63946cb0473e</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,10 +24,6 @@
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.1-dev-00953" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
   </ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Controllers\" />
-	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Api.GRRInnovations.HealthMetrics.Infrastructure\Api.GRRInnovations.HealthMetrics.Infrastructure.csproj" />
