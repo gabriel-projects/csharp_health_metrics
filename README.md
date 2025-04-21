@@ -1,15 +1,15 @@
-# 🚀 Projeto ASP.NET Core - Observável, Testável e Escalável com YARP, Prometheus e Grafana
+# 🚀 ASP.NET Core Project - Observable, Testable, and Scalable with YARP, Prometheus, and Grafana
 
-Este projeto tem como objetivo ser uma base sólida para aplicações ASP.NET Core com foco em:
-- ✅ Observabilidade
-- ✅ Resiliência
-- ✅ Testabilidade
-- ✅ Arquitetura Limpa e Escalável
-- ✅ Proxy reverso com Load Balancer via YARP
+This project aims to be a solid foundation for ASP.NET Core applications focusing on:
+- ✅ Observability
+- ✅ Resilience
+- ✅ Testability
+- ✅ Clean and Scalable Architecture
+- ✅ Reverse Proxy with Load Balancer via YARP
 
 ---
 
-## 📦 Tecnologias e Ferramentas
+## 📦 Technologies and Tools
 
 - ASP.NET Core 9
 - Docker + Docker Compose
@@ -19,98 +19,98 @@ Este projeto tem como objetivo ser uma base sólida para aplicações ASP.NET Co
 - YARP (Yet Another Reverse Proxy)
 - Serilog
 - Polly
-- OpenTelemetry (opcional)
-- Testcontainers (opcional)
+- OpenTelemetry (optional)
+- Testcontainers (optional)
 
 ---
 
-## 🧭 Roadmap Técnico de Expansão
+## 🧭 Technical Expansion Roadmap
 
-### 1. 🔍 Observabilidade Profissional
+### 1. 🔍 Professional Observability
 
 | Item | Status |
 |------|--------|
 | Health Checks (Liveness, Readiness) | ✅ |
-| Métricas HTTP e domínio (Prometheus) | ✅ |
-| Dashboards no Grafana | ✅ |
-| Exposição de métricas de domínio (ex: tarefas processadas) | 🔄 |
-| Tracing distribuído com OpenTelemetry | 🔄 |
-| Middleware de Correlation ID | 🔄 |
+| HTTP and Domain Metrics (Prometheus) | ✅ |
+| Grafana Dashboards | ✅ |
+| Domain Metrics Exposure (e.g., processed tasks) | 🔄 |
+| Distributed Tracing with OpenTelemetry | 🔄 |
+| Correlation ID Middleware | 🔄 |
 
 ---
 
-### 2. 📄 Logging e Tracing distribuído
+### 2. 📄 Logging and Distributed Tracing
 
 | Item | Status |
 |------|--------|
-| Serilog (Console + Arquivo) | ✅ |
-| Logging estruturado com contexto (TraceId, UserId, etc) | 🔄 |
-| Envio de logs para Loki / Elasticsearch | 🔄 |
-| Application Insights (opcional) | 🔄 |
-| Middleware de logging de request/response | 🔄 |
+| Serilog (Console + File) | ✅ |
+| Structured Logging with Context (TraceId, UserId, etc) | 🔄 |
+| Log Shipping to Loki / Elasticsearch | 🔄 |
+| Application Insights (optional) | 🔄 |
+| Request/Response Logging Middleware | 🔄 |
 
 ---
 
-### 3. 🧪 Testes Automatizados e Resiliência
+### 3. 🧪 Automated Testing and Resilience
 
 | Item | Status |
 |------|--------|
-| Testes de Health Check | ✅ |
-| Testes de integração com Testcontainers | 🔄 |
-| Retry, Timeout, Circuit Breaker com Polly | 🔄 |
-| Chaos Testing (simulação de falhas) | 🔄 |
-| Load Testing com NBomber / k6 | 🔄 |
+| Health Check Tests | ✅ |
+| Integration Tests with Testcontainers | 🔄 |
+| Retry, Timeout, Circuit Breaker with Polly | 🔄 |
+| Chaos Testing (failure simulation) | 🔄 |
+| Load Testing with NBomber / k6 | 🔄 |
 
 ---
 
-### 4. 🔔 Monitoramento e Alertas
+### 4. 🔔 Monitoring and Alerts
 
 | Item | Status |
 |------|--------|
-| Dashboards customizados no Grafana | ✅ |
-| Alertas configurados (ex: erro 5xx ↑, health check falhando) | 🔄 |
-| Monitoramento do YARP (latência por backend, erros) | 🔄 |
-| Alertmanager + integração com Slack/Discord/Teams | 🔄 |
+| Custom Grafana Dashboards | ✅ |
+| Configured Alerts (e.g., 5xx errors ↑, failing health checks) | 🔄 |
+| YARP Monitoring (backend latency, errors) | 🔄 |
+| Alertmanager + Slack/Discord/Teams Integration | 🔄 |
 
 ---
 
-### 5. 🧱 Arquitetura Escalável
+### 5. 🧱 Scalable Architecture
 
 | Item | Status |
 |------|--------|
-| Clean Architecture modular (Domain, Infra, API, Worker) | ✅ |
-| CQRS com MediatR | 🔄 |
-| BackgroundService com fila (RabbitMQ ou channel) | 🔄 |
-| Publicação de eventos com Domain Events | 🔄 |
-| Modularização via Class Libraries | ✅ |
-| Uso de ValueObjects e Aggregates (DDD) | 🔄 |
+| Modular Clean Architecture (Domain, Infra, API, Worker) | ✅ |
+| CQRS with MediatR | 🔄 |
+| BackgroundService with Queue (RabbitMQ or channel) | 🔄 |
+| Event Publishing with Domain Events | 🔄 |
+| Modularization via Class Libraries | ✅ |
+| Use of ValueObjects and Aggregates (DDD) | 🔄 |
 
 ---
 
-### 6. 🌐 YARP + Docker – Proxy Reverso com Load Balancer
+### 6. 🌐 YARP + Docker – Reverse Proxy with Load Balancer
 
 | Item | Status |
 |------|--------|
-| Serviço YARP via Docker | ✅ |
-| Balanceamento entre múltiplas instâncias da API | ✅ |
-| Roteamento por path/header/host | 🔄 |
-| Sticky sessions ou round-robin | 🔄 |
-| Middleware Prometheus no YARP | 🔄 |
-| Métricas de proxy no Grafana | 🔄 |
+| YARP Service via Docker | ✅ |
+| Load Balancing Between Multiple API Instances | ✅ |
+| Routing by Path/Header/Host | 🔄 |
+| Sticky Sessions or Round-robin | 🔄 |
+| Prometheus Middleware in YARP | 🔄 |
+| Proxy Metrics in Grafana | 🔄 |
 
 ---
 
-## 📈 Próximos passos
+## 📈 Next Steps
 
-- [ ] Configurar OpenTelemetry com spans entre serviços
-- [ ] Subir logs para Loki e visualizar no Grafana Logs
-- [ ] Implementar serviço de tarefas com CQRS + Worker
-- [ ] Adicionar testes de integração com Testcontainers
-- [ ] Adicionar cache híbrido (Memory + Redis)
-- [ ] Automatizar deploy com GitHub Actions + Terraform
+- [ ] Configure OpenTelemetry with spans between services
+- [ ] Upload logs to Loki and visualize in Grafana Logs
+- [ ] Implement task service with CQRS + Worker
+- [ ] Add integration tests with Testcontainers
+- [ ] Add hybrid cache (Memory + Redis)
+- [ ] Automate deployment with GitHub Actions + Terraform
 
 ---
 
-## 🌐 Contato 
+## 🌐 Contact
 
 ---
